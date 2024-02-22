@@ -1,7 +1,8 @@
 {
-  "name": "webserverexamples",
+  "name": "webserverproject",
   "version": "1.0.0",
-  "description": "![Pic of me](Me.jpg)\r > I am a senior year Computer Science major, having taken the classes Visual Programming, Computer Science I,II Data Structures,III Web Development, Digital Logic, Object-oriented Programming, Software Engineering, Discrete Mathematics in Computing, Assembly Language and Computer Architecture, Operating Systems, Language Processing and Discrete and Continuous Computer Algorithms. I’ve created a few frontend only webpages either as tests or for portfolio purposes, as well as creating some programs where I created a relatively simple game and another where I connected to an Arduino board to create a specific machine. I also helped create a more detailed full stack webpage on a sort of e-commerce site for an online game. \r ---\r > Although I have done a bit of full stack work before I believe this class will greatly expand my knowledge of it, as currently it is relatively rudimentary. I hope to use this knowledge to be able to create detailed webpages on any topic I would need to create a webpage for, whether it be a frontend only site meant to advertise a product/business or a more extensive site that would require a database to keep track of users/products. I hope to be able to satisfy a wide range of requests and be able to be a member of a programming team that can be relied on to handle various aspects of development.",
+  "description": "",
+  "main": "index.js",
   "author": "",
   "license": "ISC",
   "scripts": {
