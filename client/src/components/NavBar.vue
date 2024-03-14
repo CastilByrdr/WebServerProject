@@ -96,7 +96,7 @@ function toggleAdmin() {
           </div>
           <div class="avatar" v-else>
             <img src="../assets/Trunks_anime_profile.png">
-            <strong>Trunks</strong>
+            <strong>Trunks Brief</strong>
           </div>
           <div class="navbar-item has-dropdown is-hoverable" v-if="!(isLogin || isAdmin)">
           <a class="button is-light, navbar-link">
@@ -107,7 +107,7 @@ function toggleAdmin() {
              Joseph Ertman
             </a>
             <a class="navbar-item" role="button" @click="toggleLogin">
-              Trunks
+              Trunks Brief
             </a>
           </div>
           </div>
