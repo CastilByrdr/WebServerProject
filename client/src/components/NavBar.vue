@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
+import { isLogin, isAdmin } from "@/main"
 
-let isLogin=ref(false);
-let isAdmin=ref(false);
 
 const isActive = ref(false);
 
