@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { ref, shallowRef, computed, watch, nextTick } from 'vue'
 import Chart from 'chart.js/auto'
-
-interface Weight {
-	weight: number;
-	date: number;
-}
+import { type Weight, getWeight } from "@/model/weight";
 
 const weights = ref<Weight[]>([])
 
