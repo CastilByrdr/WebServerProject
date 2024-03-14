@@ -87,10 +87,18 @@ function toggleAdmin() {
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary" v-if="!isLogin || isAdmin">
+          <a class="button is-primary" v-if="!(isLogin || isAdmin)">
             <strong>Sign up</strong>
           </a>
-          <div class="navbar-item has-dropdown is-hoverable">
+          <div class="avatar" v-else-if="isAdmin">
+            <img src="../assets/Agent_Joseph.png">
+            <strong>Joseph Ertman</strong>
+          </div>
+          <div class="avatar" v-else>
+            <img src="../assets/Trunks_anime_profile.png">
+            <strong>Trunks</strong>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable" v-if="!(isLogin || isAdmin)">
           <a class="button is-light, navbar-link">
             Log in
           </a>
@@ -103,6 +111,12 @@ function toggleAdmin() {
             </a>
           </div>
           </div>
+          <a class="button is-light" @click="toggleAdmin" v-else-if="isAdmin">
+            Log out
+          </a>
+          <a class="button is-light" @click="toggleLogin" v-else=>
+            Log out
+          </a>
         </div>
       </div>
     </div>
