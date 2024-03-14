@@ -1,6 +1,23 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import { ref } from 'vue';
 
+let isLogin=ref(false);
+let isAdmin=ref(false);
+
+const isActive = ref(false);
+
+function toggleMenu() {
+  isActive.value = !isActive.value;
+}
+
+function toggleLogin() {
+  isLogin.value = !isLogin.value;
+}
+
+function toggleAdmin() {
+  isAdmin.value = !isAdmin.value;
+}
 
 </script>
 
@@ -12,28 +29,41 @@ import { RouterLink } from 'vue-router';
       <img src="../assets/dumbbell-light-green.png" width="28" height="28">
     </a>
 
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+    <a role="button" @click="toggleMenu" :class="{ 'is-active': isActive }" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+  <div :class="{ 'is-active': isActive }" id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <RouterLink to="/" class="navbar-item">
         Home
       </RouterLink>
 
-      <RouterLink to="/activity" class="navbar-item">
-        Activity
+      <RouterLink to="/tracker" class="navbar-item"  v-if="isLogin || isAdmin">
+        Tracker
       </RouterLink>
 
-      <RouterLink to="/friends" class="navbar-item">
+      <RouterLink to="/log" class="navbar-item"  v-else>
+        Tracker
+      </RouterLink>
+
+
+      <RouterLink to="/friends" class="navbar-item" v-if="isLogin || isAdmin">
         Friends
       </RouterLink>
 
-      <RouterLink to="/search" class="navbar-item">
+      <RouterLink to="/log" class="navbar-item" v-else>
+        Friends
+      </RouterLink>
+
+      <RouterLink to="/search" class="navbar-item" v-if="isLogin || isAdmin">
+        User Search
+      </RouterLink>
+
+      <RouterLink to="/log" class="navbar-item" v-else>
         User Search
       </RouterLink>
 
@@ -43,7 +73,11 @@ import { RouterLink } from 'vue-router';
         </a>
 
         <div class="navbar-dropdown">
-          <RouterLink to="/users" class="navbar-item">
+          <RouterLink to="/users" class="navbar-item"  v-if="isAdmin">
+            Users
+          </RouterLink>
+
+          <RouterLink to="/admin" class="navbar-item"  v-else>
             Users
           </RouterLink>
         </div>
@@ -53,7 +87,7 @@ import { RouterLink } from 'vue-router';
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
+          <a class="button is-primary" v-if="!isLogin || isAdmin">
             <strong>Sign up</strong>
           </a>
           <div class="navbar-item has-dropdown is-hoverable">
@@ -61,10 +95,10 @@ import { RouterLink } from 'vue-router';
             Log in
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item">
+            <a class="navbar-item" role="button" @click="toggleAdmin">
              Joseph Ertman
             </a>
-            <a class="navbar-item">
+            <a class="navbar-item" role="button" @click="toggleLogin">
               Trunks
             </a>
           </div>

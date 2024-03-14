@@ -10,9 +10,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/activity',
-      name: 'activity',
-      component: () => import('../pages/ActivityView.vue')
+      path: '/tracker',
+      name: 'tracker',
+      component: () => import('../pages/TrackerView.vue')
     },
     {
       path: '/friends',
@@ -28,6 +28,16 @@ const router = createRouter({
       path: '/users',
       name: 'users',
       component: () => import('../pages/UserView.vue')
+    },
+    {
+      path: '/log',
+      name: 'log',
+      component: () => import('../pages/LogView.vue')
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('../pages/AdminView.vue')
     }
   ]
 })
