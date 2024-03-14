@@ -23,7 +23,7 @@ const addWeight = () => {
 }
 
 const removeWeight = () => {
-	weights.value.pop()
+		weights.value.pop()
 }
 
 watch(weights, (newWeights) => {
@@ -94,7 +94,7 @@ watch(weights, (newWeights) => {
 				value="Add weight" />
 		</form>
 
-		<div v-if="weights && weights.length > 0">
+		<div v-if="weights && weights.length >= 0">
 
 			<h2>
 				Last 7 days
