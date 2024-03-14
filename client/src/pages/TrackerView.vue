@@ -22,6 +22,10 @@ const addWeight = () => {
 	})
 }
 
+const removeWeight = () => {
+	weights.value.pop()
+}
+
 watch(weights, (newWeights) => {
 	const ws = [...newWeights]
 
@@ -108,6 +112,8 @@ watch(weights, (newWeights) => {
 						<small>
 							{{ new Date(weight.date).toLocaleDateString() }}
 						</small>
+						<button class="delete" @click="removeWeight">
+						</button>
 					</li>
 				</ul>
 			</div>
