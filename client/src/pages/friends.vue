@@ -34,12 +34,12 @@ watch(weights, (newWeights) => {
 		weightChart.value.data.labels = ws
 			.sort((a, b) => a.date - b.date)
 			.map(weight => new Date(weight.date).toLocaleDateString() )
-			.slice(-7)
+			.slice(-10)
 
 		weightChart.value.data.datasets[0].data = ws
 			.sort((a, b) => a.date - b.date)
 			.map(weight => weight.weight)
-			.slice(-7)
+			.slice(-10)
 
 		weightChart.value.update()
 		return
@@ -89,7 +89,7 @@ watch(weights, (newWeights) => {
 		<div v-if="weights && weights.length >= 0">
 
 			<h2>
-				Last 7 days
+				Last 10 tracks
 			</h2>
 
 			<div class="canvas-box">
