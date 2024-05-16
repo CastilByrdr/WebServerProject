@@ -1,0 +1,46 @@
+###
+GET http://localhost:3000/api/v1/users
+
+###
+GET http://localhost:3000/api/v1/users/3
+
+###
+GET http://localhost:3000/api/v1/users/search?q=jos
+
+###
+DELETE http://localhost:3000/api/v1/users/1
+
+###
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+    "firstName": "Joseph",
+    "lastName": "Ertman",
+    "email": "ertmanj1@newpaltz.edu"
+}
+
+###
+PATCH http://localhost:3000/api/v1/users/31
+Content-Type: application/json
+
+{
+    "firstName": "Joey"
+}
+
+//Weight
+
+###
+GET http://localhost:3000/api/v1/weight
+
+###
+DELETE http://localhost:3000/api/v1/weight/1
+
+###
+POST http://localhost:3000/api/v1/weight
+Content-Type: application/json
+
+{
+    "weight":200,
+    "date":6.5e13
+}

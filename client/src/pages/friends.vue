@@ -2,7 +2,6 @@
 import { ref, onMounted, shallowRef, computed, watch, nextTick } from 'vue'
 import Chart from 'chart.js/auto'
 import { type Weight, getWeight } from "@/model/weight";
-import { isLogin, isAdmin } from "@/main"
 
 const weights = ref<Weight[]>([])
 
@@ -34,12 +33,12 @@ watch(weights, (newWeights) => {
 		weightChart.value.data.labels = ws
 			.sort((a, b) => a.date - b.date)
 			.map(weight => new Date(weight.date).toLocaleDateString() )
-			.slice(-7)
+			.slice(-10)
 
 		weightChart.value.data.datasets[0].data = ws
 			.sort((a, b) => a.date - b.date)
 			.map(weight => weight.weight)
-			.slice(-7)
+			.slice(-10)
 
 		weightChart.value.update()
 		return
@@ -77,19 +76,14 @@ watch(weights, (newWeights) => {
 <template>
 	<main>
 		<h1>Friend Charts</h1>
-        <div class="avatar" v-if="!isAdmin && isLogin">
-            <img src="../assets/Agent_Joseph.png" width="50" height="55">
-            <strong> Joseph Ertman</strong>
-        </div>
-        <div class="avatar" v-else-if="!isLogin && isAdmin">
+        <div class="avatar">
             <img src="../assets/Trunks_anime_profile.png" width="50" height="50">
             <strong> Trunks Brief</strong>
         </div>
-        <div v-else></div>
 		<div v-if="weights && weights.length >= 0">
 
 			<h2>
-				Last 7 days
+				Last 10 tracks
 			</h2>
 
 			<div class="canvas-box">
