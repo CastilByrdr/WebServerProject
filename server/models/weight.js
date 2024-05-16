@@ -49,9 +49,8 @@ async function search(q) {
 
     const filter = {
         $or: [
-            { brand: { $regex: q, $options: 'i' } },
-            { title: { $regex: q, $options: 'i' } },
-            { description: { $regex: q, $options: 'i' } }
+            { weight: { $regex: q, $options: 'i' } },
+            { date: { $regex: q, $options: 'i' } },
         ]
     };
 

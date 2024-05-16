@@ -11,12 +11,14 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
-    "vue": "^3.4.15",
-    "vue-router": "^4.2.5",
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "@oruga-ui/oruga-next": "^0.8.9",
+    "@oruga-ui/theme-oruga": "^0.2.2",
     "bulma": "^0.9.4",
     "chart.js": "^4.4.2",
+    "vue": "^3.4.15",
     "vue-chartjs": "^5.3.0",
+    "vue-router": "^4.2.5",
     "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {

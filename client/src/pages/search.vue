@@ -1,73 +1,91 @@
 <script setup lang="ts">
-import { getUsers, type User } from '../model/users';
 import { ref } from "vue";
-let input = ref("");
-const usersList = ref([] as User[])
-getUsers()
-const users = [userList];
-function filteredList() {
-  return users.filter((users) =>
-    users.toLowerCase().includes(input.value.toLowerCase())
-  );
+
+const isFetching = ref(false);
+const page = ref(1);
+const totalPages = ref(1);
+
+const data = ref([]);
+const selected = ref(null);
+const name = ref("");
+
+async function getAsyncData(lastName) {
+    if (name.value !== lastName) {
+        name.value = lastName;
+        data.value = [];
+        page.value = 1;
+        totalPages.value = 1;
+    }
+
+    // String cleared
+    if (!lastName.length) {
+        data.value = [];
+        page.value = 1;
+        totalPages.value = 1;
+        return;
+    }
+
+    // Reached last page
+    if (page.value > totalPages.value) {
+        return;
+    }
+
+    isFetching.value = true;
+    try {
+        const _data = await fetch(
+            'api/v1/users',
+        ).then((response) => response.json());
+
+        data.value = [...data.value, ..._data.results];
+        page.value += 1;
+        totalPages.value = _data.total_pages;
+    } catch (err) {
+        console.error(err);
+    } finally {
+        isFetching.value = false;
+    }
+}
+
+function getMoreAsyncData() {
+    getAsyncData(name.value);
 }
 </script>
 
 <template>
-    <input type="text" v-model="input" placeholder="Search users..." />
-  <div class="item users" v-for="users in filteredList()" :key="users">
-    <p>{{ users }}</p>
-  </div>
-  <div class="item error" v-if="input&&!filteredList().length">
-     <p>No results found!</p>
-  </div>
+    <section>
+    <o-field label="Find a user by last name">
+        <o-autocomplete
+            :data="data"
+            placeholder="e.g. Ertman"
+            field="title"
+            :loading="isFetching"
+            check-scroll
+            open-on-focus
+            :debounce="500"
+            @input="getAsyncData"
+            @select="(option) => (selected = option)"
+            @scroll-end="getMoreAsyncData">
+            <template v-if="page > totalPages" #footer>
+                <span class="ex-text-grey">
+                    Thats it! No more users found.
+                </span>
+            </template>
+        </o-autocomplete>
+    </o-field>
+    <p><b>Selected:</b> {{ selected }}</p>
+</section>
 </template>
   
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-  }
-
-  body {
-    padding: 20px;
-    min-height: 100vh;
-    background-color: rgb(234, 242, 255);
-  }
-
-  input {
-    display: block;
-    width: 350px;
-    margin: 20px auto;
-    padding: 10px 45px;
-    background: white url("assets/search-icon.svg") no-repeat 15px center;
-    background-size: 15px 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  }
-
-  .item {
-    width: 350px;
-    margin: 0 auto 10px auto;
-    padding: 10px 20px;
-    color: white;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-      rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-  }
-
-  .users {
-    background-color: rgb(97, 62, 252);
-    cursor: pointer;
-  }
-
-  .error {
-    background-color: tomato;
+  @import '@oruga-ui/theme-oruga/dist/oruga-full.css';
+  .dropdown-menu {
+    min-width: 12em;
+    @apply bg-white m-0 px-2 shadow-lg rounded-sm z-10;
+}
+.dropdown-item {
+    @apply no-underline px-1 py-2 cursor-pointer;
+}
+  .ex-text-grey {
+    color: grey;
   }
 </style>
