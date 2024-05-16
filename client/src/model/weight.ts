@@ -5,7 +5,6 @@ import { api } from "../viewModel/session"
 
 
 export interface Weight {
-	id: number;
 	weight: number;
 	date: number;
 }
