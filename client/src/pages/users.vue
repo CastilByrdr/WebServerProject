@@ -1,3 +1,24 @@
+<script steup lang="ts">
+import { getUsers, type User } from '../model/users';
+const users = ref([] as User[])
+getUsers()
+const fields = [
+      'ID','First Name','Last Name','Email'
+    ]
+const Data = [users]
+export default {
+  name: 'TableComponent',
+  props:{
+      // 
+      Data:{
+          type: Array,
+      },
+      fields:{
+          type: Array,
+      }
+  }, 
+}
+</script>
 <template>
   <main class="hero">
     <div class="hero-body">
@@ -6,53 +27,22 @@
         Add User
       </button>
     </div>
-    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+    <table class="table is-bordered is-striped is-hoverable is-fullwidth" id="users" >
+      <thead>
       <tr>
-        <th></th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Username</th>
-        <th>Admin</th>
-        <th></th>
+        <!-- loop through each value of the fields to get the table header -->
+        <th  v-for="field in fields" :key='field' @click="sortTable(field)" > 
+          {{field}} <i class="bi bi-sort-alpha-down" aria-label='Sort Icon'></i>
+        </th>
       </tr>
-      <tr>
-        <td>
-          <img src="../assets/Agent_Joseph.png" height="55" width="50">
-        </td>
-        <td>Joseph</td>
-        <td>Ertman</td>
-        <td>ertmanj1@newpaltz.edu</td>
-        <td>CastilByrdr</td>
-        <td>True</td>
-        <td>
-          <button class="button">
-            Edit
-          </button>
-          <button class="button">
-            Delete
-          </button>
-        </td>
+    </thead>
+    <tbody>
+        <!-- Loop through the list get the each student data -->
+        <tr v-for="item in filteredList" :key='item'>
+        <td v-for="field in fields" :key='field'>{{item[field]}}</td>
       </tr>
-      <tr>
-        <td>
-          <img src="../assets/Trunks_anime_profile.png" height="55" width="50">
-        </td>
-        <td>Trunks</td>
-        <td>Brief</td>
-        <td>briefst@capsulecorp.org</td>
-        <td>MysteriousYouth</td>
-        <td>False</td>
-        <td>
-          <button class="button">
-            Edit
-          </button>
-          <button class="button">
-            Delete
-          </button>
-        </td>
-      </tr>
-    </table>
+    </tbody>
+  </table> 
     </div>
   </main>
 </template>
