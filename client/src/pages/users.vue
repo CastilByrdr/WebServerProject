@@ -1,5 +1,6 @@
 <script steup lang="ts">
 import { getUsers, type User } from '../model/users';
+import { ref } from "vue";
 const users = ref([] as User[])
 getUsers()
 const fields = [
