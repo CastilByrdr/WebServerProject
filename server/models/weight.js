@@ -1,12 +1,6 @@
 /* B"H
 */
 const fs = require('fs/promises');
-const COLLECTION_NAME = 'Weight';
-
-async function collection(){
-    const db = await connect();
-    return db.collection(COLLECTION_NAME);
-}
 
 const fileName = __dirname + '/../data/weight.json';
 
