@@ -2,7 +2,6 @@
 import { ref, onMounted, shallowRef, computed, watch, nextTick } from 'vue'
 import Chart from 'chart.js/auto'
 import { type Weight, getWeight } from "@/model/weight";
-import { isLogin, isAdmin } from "@/main"
 
 const weights = ref<Weight[]>([])
 
@@ -77,15 +76,10 @@ watch(weights, (newWeights) => {
 <template>
 	<main>
 		<h1>Friend Charts</h1>
-        <div class="avatar" v-if="!isAdmin && isLogin">
-            <img src="../assets/Agent_Joseph.png" width="50" height="55">
-            <strong> Joseph Ertman</strong>
-        </div>
-        <div class="avatar" v-else-if="!isLogin && isAdmin">
+        <div class="avatar">
             <img src="../assets/Trunks_anime_profile.png" width="50" height="50">
             <strong> Trunks Brief</strong>
         </div>
-        <div v-else></div>
 		<div v-if="weights && weights.length >= 0">
 
 			<h2>

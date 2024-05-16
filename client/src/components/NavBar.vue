@@ -1,21 +1,13 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
-import { isLogin, isAdmin } from "@/main"
+import LoginBadge from './LoginBadge.vue';
 
 
 const isActive = ref(false);
 
 function toggleMenu() {
   isActive.value = !isActive.value;
-}
-
-function toggleLogin() {
-  isLogin.value = !isLogin.value;
-}
-
-function toggleAdmin() {
-  isAdmin.value = !isAdmin.value;
 }
 
 </script>
@@ -41,28 +33,15 @@ function toggleAdmin() {
         Home
       </RouterLink>
 
-      <RouterLink to="/tracker" class="navbar-item"  v-if="isLogin || isAdmin">
+      <RouterLink to="/tracker" class="navbar-item">
         Tracker
       </RouterLink>
 
-      <RouterLink to="/log" class="navbar-item"  v-else>
-        Tracker
-      </RouterLink>
-
-
-      <RouterLink to="/friends" class="navbar-item" v-if="isLogin || isAdmin">
+      <RouterLink to="/friends" class="navbar-item">
         Friends
       </RouterLink>
 
-      <RouterLink to="/log" class="navbar-item" v-else>
-        Friends
-      </RouterLink>
-
-      <RouterLink to="/search" class="navbar-item" v-if="isLogin || isAdmin">
-        User Search
-      </RouterLink>
-
-      <RouterLink to="/log" class="navbar-item" v-else>
+      <RouterLink to="/search" class="navbar-item">
         User Search
       </RouterLink>
 
@@ -70,52 +49,11 @@ function toggleAdmin() {
         <a class="navbar-link">
           Admin
         </a>
-
-        <div class="navbar-dropdown">
-          <RouterLink to="/users" class="navbar-item"  v-if="isAdmin">
-            Users
-          </RouterLink>
-
-          <RouterLink to="/admin" class="navbar-item"  v-else>
-            Users
-          </RouterLink>
-        </div>
-      </div>
     </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary" v-if="!(isLogin || isAdmin)">
-            <strong>Sign up</strong>
-          </a>
-          <div class="avatar" v-else-if="isAdmin">
-            <img src="../assets/Agent_Joseph.png">
-            <strong>Joseph Ertman</strong>
-          </div>
-          <div class="avatar" v-else>
-            <img src="../assets/Trunks_anime_profile.png">
-            <strong>Trunks Brief</strong>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable" v-if="!(isLogin || isAdmin)">
-          <a class="button is-light, navbar-link">
-            Log in
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" role="button" @click="toggleAdmin">
-             Joseph Ertman
-            </a>
-            <a class="navbar-item" role="button" @click="toggleLogin">
-              Trunks Brief
-            </a>
-          </div>
-          </div>
-          <a class="button is-light" @click="toggleAdmin" v-else-if="isAdmin">
-            Log out
-          </a>
-          <a class="button is-light" @click="toggleLogin" v-else=>
-            Log out
-          </a>
+        <LoginBadge />
         </div>
       </div>
     </div>
